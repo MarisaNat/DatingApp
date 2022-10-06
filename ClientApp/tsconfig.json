@@ -2,6 +2,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictPropertyInitialization": false, //Wichtig, da ansonsten jeder Property ein Wert zugewiesen werden muss, was z.B: bei einer @Input Property wenig Sinn macht
+    "strictNullChecks": false, // Ansonsten kann z.B: aus einem Observable, das den User liefern soll, das aber auch null enthalten kann, kein User entnommen werden und erst anschließend auf null geprüft werden. (Bsp. jwt.interceptor
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
