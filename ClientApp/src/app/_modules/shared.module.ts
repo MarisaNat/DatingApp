@@ -4,6 +4,7 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ToastrModule } from "ngx-toastr";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from "@kolkov/ngx-gallery";
+import { FileUploadModule } from "ng2-file-upload";
 
 
 
@@ -14,14 +15,16 @@ import { NgxGalleryModule } from "@kolkov/ngx-gallery";
     BsDropdownModule.forRoot(), //Wird direkt beim Laden des app-modules geladen
     ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   //Alles was exportiert wird, kann auaßerhalb verwendet werden!
   exports:[
     BsDropdownModule,
     ToastrModule,
     TabsModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }
