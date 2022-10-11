@@ -14,6 +14,7 @@ namespace API.Data
         //Photos sollen nicht einzelnen abgefragt werden, sondern immer direkt dem User als Collection angehängt werden, daher braucht es kein eigenes DbSet für Photos
 
         public DbSet<UserLike> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +34,16 @@ namespace API.Data
                 .WithMany(l => l.LikedByUsers)
                 .HasForeignKey(s => s.LikedUserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Message>()
+               .HasOne(u => u.Recipient)
+               .WithMany(m => m.MessagesReceived)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }
