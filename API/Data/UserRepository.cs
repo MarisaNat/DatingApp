@@ -62,16 +62,18 @@ namespace API.Data
                 .SingleOrDefaultAsync(user => user.UserName == username);
         }
 
+        public async Task<string> GetUserGender(string username)
+        {
+            return await _context.Users.Where(x => x.UserName == username)
+                .Select(x => x.Gender)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             return await _context.Users
                 .Include(p => p.Photos) //eager loading. User lädt auch direkt alle Fotos mit: Problem:Loop, da Foto auch user beinhalterte, der widerum Fotos beinhaltet etc.
                 .ToListAsync();
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(AppUser user)
